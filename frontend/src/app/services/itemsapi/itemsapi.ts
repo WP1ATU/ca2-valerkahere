@@ -1,11 +1,15 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, signal, inject } from '@angular/core';
 import { Movie } from '../../models/movie.interface';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Itemsapi {
+
+
+
   private _http = inject(HttpClient);
 
   private _apiUrl = "http://localhost:5050";
@@ -21,6 +25,26 @@ export class Itemsapi {
           this.movies.set(data);
       });
   }
+
+  // make posters safe (otherwise don't display in <object>)
+  // https://angular.dev/best-practices/security#trusting-safe-values
+
+      // for sanitizing posters
+    private sanitizer = inject(DomSanitizer);
+  // TO BE RUN WHEN NEEDED BECAUSE PROCESSING
+//   updatePosterUrl() {
+//     // for each poster
+//     // take poster
+//     // make it safe
+//     // replace it in the movie ???
+//     for (let index = 0; index < this.movies().length; index++) {
+//         const currentMovie = this.movies()[index];
+//         const safePoster = this.sanitizer.bypassSecurityTrustResourceUrl(this.movies()[index].poster);
+//         this.movies()[index].poster = safePoster.toString();
+//     }
+
+    
+//   }
 
   // add one movie
   addItem(myTitle: string, myPlot: string, myYear: string, myPoster:string) {
