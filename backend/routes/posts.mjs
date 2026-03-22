@@ -6,11 +6,18 @@ const router = express.Router();
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
-  let collection = await db.collection("movies");
-  let results = await collection.find({})
-    .limit(60)
-    .toArray();
-  res.send(results).status(200);
+  try {
+      let collection = await db.collection("movies");
+      let results = await collection.find({})
+      .sort({ _id: -1}) // SORT FIRST: -1 means Descending (Newest first)
+      .limit(50)
+      .toArray();
+    res.send(results).status(200);
+  } 
+  catch (error) {
+    console.error("Database query failed:", error);
+    res.status(500).send({ error: "Failed to fetch movies" });
+  }
 });
 
 // Get a single post

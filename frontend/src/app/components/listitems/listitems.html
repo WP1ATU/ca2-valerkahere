@@ -63,7 +63,7 @@ row bg-light mx-1 p-4">
     <div class="col d-flex"> <!-- Column stretches to match the tallest in the row -->
       <div class="card h-100 w-100"> <!-- Card fills the full height of the column -->
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ movieData.title }}</h5>
+          <h5 class="card-title">{{ movieData.title || "N/A" }}</h5>
           <p class="card-text">{{ movieData.year }}</p>
           <!-- @if (!movieData.poster) { -->
             <!-- <object data=[movieData.poster()] type="image/jpg">
