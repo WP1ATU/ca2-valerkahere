@@ -22,7 +22,6 @@ export class Itemsapi {
   
    // return all Movie from database
   getItems() {
-    console.log(this._apiURL);
     const url = `${this._apiURL}/movies`;
     this._http.get<Movie[]>(url)
       .subscribe(data => {

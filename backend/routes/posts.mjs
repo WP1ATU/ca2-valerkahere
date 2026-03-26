@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 // Get a single post
 router.get("/:id", async (req, res) => {
   let id=req.params.id
-  console.log(id)
+
   let collection = await db.collection("movies");
   let query = {_id: ObjectId(id)};
   let result = await collection.findOne(query);
@@ -45,11 +45,11 @@ router.post("/", async (req, res) => {
 // Delete an entry
 router.delete("/:id", async (req, res) => {
   let id=req.params.id
-  console.log("del : " + id)
+
   const query = { _id: ObjectId(id) };
 
   const collection = db.collection("movies");
-  console.log(query);
+
   let result = await collection.deleteOne(query);
 
   res.send(result).status(200);
